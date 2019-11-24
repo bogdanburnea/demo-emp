@@ -1,0 +1,16 @@
+version: "3"
+services:
+  db:
+    image: "postgres:12"
+    networks:
+      - postgres-shared
+    container_name: "demo_postgres"
+    ports:
+      - "54320:5432"
+    volumes:
+      - demo_dbdata:/var/lib/postgresql/data
+networks:
+  postgres-shared:
+    driver: bridge      
+volumes:
+  demo_dbdata:
