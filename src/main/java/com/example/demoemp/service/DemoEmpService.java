@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DemoEmpService {
     public List<EmployeeDTO> findAll();
+
+    EmployeeDTO findById(String id);
 }

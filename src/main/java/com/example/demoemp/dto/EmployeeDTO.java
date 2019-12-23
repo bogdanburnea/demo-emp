@@ -16,19 +16,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EmployeeDTO {
     @NotNull
-    private Long empl_id;
+    private String empl_id;
 
     @NotNull
     private String empl_name;
-
-    @NotNull
-    private EmployeeJobEnum empl_job;
 
     @NotNull
     private LocalDateTime empl_date_of_birth;
 
     @NotNull
     private LocalDateTime empl_date_of_hire;
+
+    @NotNull
+    private EmployeeJobEnum empl_job;
 
     @NotNull
     private EmployeeDepartmentEnum empl_department;

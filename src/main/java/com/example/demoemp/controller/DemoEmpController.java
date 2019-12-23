@@ -1,16 +1,10 @@
 package com.example.demoemp.controller;
 
-import com.example.demoemp.domain.Employee;
 import com.example.demoemp.dto.EmployeeDTO;
 import com.example.demoemp.service.DemoEmpService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +25,14 @@ public class DemoEmpController {
     @ApiOperation(value = "findall", notes = "Endpoint for returning all Employees", response = EmployeeDTO.class)
     public List<EmployeeDTO> findAll() {
         return demoEmpService.findAll();
+    }
+
+    @GetMapping("/findbyid/{id}")
+    @ApiOperation(value = "findbyid", notes = "Endpoint for returning one Employee by id", response = EmployeeDTO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Id", value = "Employee Id, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
+    public EmployeeDTO findById(@PathVariable String Id) {
+        return demoEmpService.findById(Id);
     }
 }
 
