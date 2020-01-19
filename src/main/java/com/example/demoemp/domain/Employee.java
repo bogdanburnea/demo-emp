@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -23,6 +24,11 @@ public class Employee implements Serializable {
 
     @Id
     @NotNull
+    @Column(name = "empl_email")
+    private String empl_email;
+
+    @NotNull
+    @Column(name = "empl_id")
     private String empl_id;
 
     @NotNull
@@ -31,11 +37,11 @@ public class Employee implements Serializable {
 
     @NotNull
     @Column(name = "empl_date_of_birth")
-    private LocalDateTime empl_date_of_birth;
+    private LocalDate empl_date_of_birth;
 
     @NotNull
     @Column(name = "empl_date_of_hire")
-    private LocalDateTime empl_date_of_hire;
+    private LocalDate empl_date_of_hire;
 
     @NotNull
     @Column(name = "empl_job")

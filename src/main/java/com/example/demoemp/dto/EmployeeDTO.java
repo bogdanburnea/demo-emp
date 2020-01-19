@@ -2,19 +2,25 @@ package com.example.demoemp.dto;
 
 import com.example.demoemp.dto.type.EmployeeDepartmentEnum;
 import com.example.demoemp.dto.type.EmployeeJobEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDTO {
+
+    @NotNull
+    @Email
+    private String empl_email;
+
     @NotNull
     private String empl_id;
 
@@ -22,10 +28,12 @@ public class EmployeeDTO {
     private String empl_name;
 
     @NotNull
-    private LocalDateTime empl_date_of_birth;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String empl_date_of_birth;
 
     @NotNull
-    private LocalDateTime empl_date_of_hire;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String empl_date_of_hire;
 
     @NotNull
     private EmployeeJobEnum empl_job;

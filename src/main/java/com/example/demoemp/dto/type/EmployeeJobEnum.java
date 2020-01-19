@@ -1,5 +1,5 @@
 package com.example.demoemp.dto.type;
 
 public enum EmployeeJobEnum {
-    ACC, SD, OPS, IT
+    MNG, ADM, HR, ACC, SR, IT, ENG
 }

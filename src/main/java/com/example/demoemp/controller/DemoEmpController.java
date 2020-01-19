@@ -6,6 +6,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,18 +22,51 @@ public class DemoEmpController {
     @Autowired
     DemoEmpService demoEmpService;
 
-    @GetMapping("/findall")
-    @ApiOperation(value = "findall", notes = "Endpoint for returning all Employees", response = EmployeeDTO.class)
-    public List<EmployeeDTO> findAll() {
+    @GetMapping("/get-all-employees")
+    @ApiOperation(value = "getAllEmployees", notes = "Endpoint for returning all Employees", response = EmployeeDTO.class)
+    public List<EmployeeDTO> getAllEmployees() {
         return demoEmpService.findAll();
     }
 
-    @GetMapping("/findbyid/{id}")
-    @ApiOperation(value = "findbyid", notes = "Endpoint for returning one Employee by id", response = EmployeeDTO.class)
+    @GetMapping("/get-employee-by-email/{email}")
+    @ApiOperation(value = "getEmployeeByEmail", notes = "Endpoint for returning one Employee by email", response = EmployeeDTO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "Id", value = "Employee Id, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
-    public EmployeeDTO findById(@PathVariable String Id) {
-        return demoEmpService.findById(Id);
+            @ApiImplicitParam(name = "email", value = "Employee email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
+    public EmployeeDTO getEmployeeByEmail(@PathVariable String email) {
+        return demoEmpService.findById(email);
     }
+
+    @GetMapping("/get-employee-by-dept/{dept}")
+    @ApiOperation(value = "getEmployeeByDept", notes = "Endpoint for returning one Employee by department", response = EmployeeDTO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "dept", value = "Employee department, one of the following values: ADMIN, HR, FIN, SALES, IT, PROD", required = true, dataType = "String")})
+    public List<EmployeeDTO> getEmployeeByDept(@PathVariable String dept) {
+        return demoEmpService.findByDept(dept);
+    }
+
+    @PostMapping("/create-employee/{email}")
+    @ApiOperation(value = "createEmployee", notes = "Endpoint for adding a Employee", response = EmployeeDTO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "Employee Email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
+    public EmployeeDTO createEmployee(@PathVariable String email, @RequestBody @Valid EmployeeDTO employeeDTO) {
+        return demoEmpService.save(email, employeeDTO);
+    }
+
+    @PutMapping("/update-employee/{email}")
+    @ApiOperation(value = "updateEmployee", notes = "Endpoint for updating a Employee", response = EmployeeDTO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "Employee Email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
+    public EmployeeDTO updateEmployee(@PathVariable String email, @RequestBody @Valid EmployeeDTO employeeDTO) {
+        return demoEmpService.save(email, employeeDTO);
+    }
+
+    @DeleteMapping("/delete-employee-by-email/{email}")
+    @ApiOperation(value = "deleteEmployeeByEmail", notes = "Endpoint for deleting a Employee by email", response = EmployeeDTO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "Employee Email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
+    public void deleteEmployeeByEmail(@PathVariable String email) {
+        demoEmpService.deleteEmployeeByEmail(email);
+    }
+
 }
 
