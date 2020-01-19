@@ -18,6 +18,12 @@ import javax.validation.constraints.NotBlank;
 public class ApplicationConfig {
 
     // miscellaneous properties
+
+    @Value("${application.name}")
+    @NotBlank
+    @Getter
+    private String applicationName;
+
     @Value("${version.number}")
     @NotBlank
     @Getter
