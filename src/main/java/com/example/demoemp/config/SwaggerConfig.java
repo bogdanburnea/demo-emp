@@ -18,7 +18,7 @@ public class SwaggerConfig {
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.demoemp.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.demoemp.employee.controller"))
                 .paths(PathSelectors.any()).build().apiInfo(getMetaData());
     }
 

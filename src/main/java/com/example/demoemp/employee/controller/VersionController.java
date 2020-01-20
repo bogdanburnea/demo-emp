@@ -1,4 +1,4 @@
-package com.example.demoemp.controller;
+package com.example.demoemp.employee.controller;
 
 import com.example.demoemp.config.ApplicationConfig;
 import io.swagger.annotations.Api;

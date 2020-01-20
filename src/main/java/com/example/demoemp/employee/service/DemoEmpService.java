@@ -1,8 +1,8 @@
-package com.example.demoemp.service;
+package com.example.demoemp.employee.service;
 
-import com.example.demoemp.dto.EmployeeDTO;
-import com.example.demoemp.dto.mapper.EmployeeMapper;
-import com.example.demoemp.repository.DemoEmpRepository;
+import com.example.demoemp.employee.dto.EmployeeDTO;
+import com.example.demoemp.employee.dto.mapper.EmployeeMapper;
+import com.example.demoemp.employee.repository.DemoEmpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

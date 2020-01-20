@@ -1,7 +1,7 @@
-package com.example.demoemp.dto;
+package com.example.demoemp.employee.dto;
 
-import com.example.demoemp.dto.type.EmployeeDepartmentEnum;
-import com.example.demoemp.dto.type.EmployeeJobEnum;
+import com.example.demoemp.employee.dto.type.EmployeeDepartmentEnum;
+import com.example.demoemp.employee.dto.type.EmployeeJobEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,9 +1,9 @@
-package com.example.demoemp.dto.mapper;
+package com.example.demoemp.employee.dto.mapper;
 
-import com.example.demoemp.domain.Employee;
-import com.example.demoemp.dto.EmployeeDTO;
-import com.example.demoemp.dto.type.EmployeeDepartmentEnum;
-import com.example.demoemp.dto.type.EmployeeJobEnum;
+import com.example.demoemp.employee.dto.EmployeeDTO;
+import com.example.demoemp.employee.dto.type.EmployeeDepartmentEnum;
+import com.example.demoemp.employee.dto.type.EmployeeJobEnum;
+import com.example.demoemp.employee.entity.Employee;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

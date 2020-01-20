@@ -1,7 +1,7 @@
-package com.example.demoemp.controller;
+package com.example.demoemp.employee.controller;
 
-import com.example.demoemp.dto.EmployeeDTO;
-import com.example.demoemp.service.DemoEmpService;
+import com.example.demoemp.employee.dto.EmployeeDTO;
+import com.example.demoemp.employee.service.DemoEmpService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
