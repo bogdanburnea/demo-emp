@@ -18,27 +18,29 @@ public class EmployeeMapper {
     public Employee fromDTO(EmployeeDTO dto) {
 
         return Employee.builder()
-                .empl_email(dto.getEmpl_email())
-                .empl_id(dto.getEmpl_id())
-                .empl_name(dto.getEmpl_name())
-                .empl_job(dto.getEmpl_job().toString())
-                .empl_department(dto.getEmpl_department().toString())
-                .empl_date_of_birth(LocalDate.parse(dto.getEmpl_date_of_birth(), dateTimeFormatter))
-                .empl_date_of_hire(LocalDate.parse(dto.getEmpl_date_of_hire(), dateTimeFormatter))
+                .empl_id(dto.getEmplId())
+                .empl_name(dto.getEmplName())
+                .empl_email(dto.getEmplEmail())
+                .empl_date_of_birth(LocalDate.parse(dto.getEmplDateOfBirth(), dateTimeFormatter))
+                .empl_hire_date(LocalDate.parse(dto.getEmplHireDate(), dateTimeFormatter))
+                .empl_leave_date((dto.getEmplLeaveDate() == null) ? null : LocalDate.parse(dto.getEmplLeaveDate(), dateTimeFormatter))
+                .empl_job(dto.getEmplJob().toString())
+                .empl_department(dto.getEmplDepartment().toString())
                 .last_updated_at(LocalDateTime.now())
-                .last_updated_by("current_user")
+                .last_updated_by("current_app_user")
                 .build();
     }
 
     public EmployeeDTO toDTO(Employee employee) {
         return EmployeeDTO.builder()
-                .empl_email(employee.getEmpl_email())
-                .empl_id(employee.getEmpl_id())
-                .empl_name(employee.getEmpl_name())
-                .empl_job(EmployeeJobEnum.valueOf(employee.getEmpl_job()))
-                .empl_department(EmployeeDepartmentEnum.valueOf(employee.getEmpl_department()))
-                .empl_date_of_birth(employee.getEmpl_date_of_birth().format(dateTimeFormatter))
-                .empl_date_of_hire(employee.getEmpl_date_of_hire().format(dateTimeFormatter))
+                .emplId(employee.getEmpl_id())
+                .emplName(employee.getEmpl_name())
+                .emplEmail(employee.getEmpl_email())
+                .emplDateOfBirth(employee.getEmpl_date_of_birth().toString())
+                .emplHireDate(employee.getEmpl_hire_date().toString())
+                .emplLeaveDate((employee.getEmpl_leave_date() == null) ? null : employee.getEmpl_leave_date().toString())
+                .emplJob(EmployeeJobEnum.valueOf(employee.getEmpl_job()))
+                .emplDepartment(EmployeeDepartmentEnum.valueOf(employee.getEmpl_department()))
                 .build();
     }
 }

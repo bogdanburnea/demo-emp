@@ -24,10 +24,6 @@ public class Employee implements Serializable {
 
     @Id
     @NotNull
-    @Column(name = "empl_email")
-    private String empl_email;
-
-    @NotNull
     @Column(name = "empl_id")
     private String empl_id;
 
@@ -36,17 +32,23 @@ public class Employee implements Serializable {
     private String empl_name;
 
     @NotNull
+    @Column(name = "empl_email")
+    private String empl_email;
+
+    @NotNull
     @Column(name = "empl_date_of_birth")
     private LocalDate empl_date_of_birth;
 
     @NotNull
-    @Column(name = "empl_date_of_hire")
-    private LocalDate empl_date_of_hire;
+    @Column(name = "empl_hire_date")
+    private LocalDate empl_hire_date;
+
+    @Column(name = "empl_leave_date")
+    private LocalDate empl_leave_date;
 
     @NotNull
     @Column(name = "empl_job")
     private String empl_job;
-
 
     @NotNull
     @Column(name = "empl_department")

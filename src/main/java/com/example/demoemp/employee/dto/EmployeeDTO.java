@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -18,26 +19,29 @@ import javax.validation.constraints.NotNull;
 public class EmployeeDTO {
 
     @NotNull
+    private String emplId;
+
+    @NotNull
+    private String emplName;
+
+    @NotNull
     @Email
-    private String empl_email;
-
-    @NotNull
-    private String empl_id;
-
-    @NotNull
-    private String empl_name;
+    private String emplEmail;
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private String empl_date_of_birth;
+    private String emplDateOfBirth;
 
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private String empl_date_of_hire;
+    private String emplHireDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String emplLeaveDate;
 
     @NotNull
-    private EmployeeJobEnum empl_job;
+    private EmployeeJobEnum emplJob;
 
     @NotNull
-    private EmployeeDepartmentEnum empl_department;
+    private EmployeeDepartmentEnum emplDepartment;
 }

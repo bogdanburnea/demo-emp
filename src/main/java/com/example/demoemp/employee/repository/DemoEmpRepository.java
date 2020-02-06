@@ -15,8 +15,8 @@ public interface DemoEmpRepository extends JpaRepository<Employee, String> {
 
     @Modifying
     @Transactional
-    @Query(value = "delete from employee where empl_email = :email ", nativeQuery = true)
-    public void deleteEmployee(@Param("email") String email);
+    @Query(value = "delete from employee where empl_id = :id ", nativeQuery = true)
+    public void deleteEmployee(@Param("id") String id);
 
     @Query(value = "select * from employee where empl_department = :dept  ", nativeQuery = true)
     public List<Employee> findAllByDept(@Param("dept") String dept);

@@ -27,8 +27,8 @@ public class EmployeeApiClient {
                 });
     }
 
-    public final ResponseEntity<List<EmployeeDTO>> getEmployeeByEmail(String email) {
-        return restTemplate.exchange("/api/get-employee-by-email/{email}", HttpMethod.GET, null,
+    public final ResponseEntity<List<EmployeeDTO>> getEmployeeById(String email) {
+        return restTemplate.exchange("/api/get-employee-by-id/{id}", HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<EmployeeDTO>>() {
                 }, email);
     }
@@ -39,22 +39,22 @@ public class EmployeeApiClient {
                 }, dept);
     }
 
-    public final ResponseEntity<EmployeeDTO> createEmployee(String email, EmployeeDTO employeeDTO) {
+    public final ResponseEntity<EmployeeDTO> createEmployee(String id, EmployeeDTO employeeDTO) {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<EmployeeDTO> postEntity = new HttpEntity<>(employeeDTO, headers);
-        return restTemplate.exchange("/api/create-employee/{email}", HttpMethod.POST, postEntity,
-                EmployeeDTO.class, email);
+        return restTemplate.exchange("/api/create-employee/{id}", HttpMethod.POST, postEntity,
+                EmployeeDTO.class, id);
     }
 
-    public final ResponseEntity<EmployeeDTO> updateEmployee(String email, EmployeeDTO employeeDTO) {
+    public final ResponseEntity<EmployeeDTO> updateEmployee(String id, EmployeeDTO employeeDTO) {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<EmployeeDTO> putEntity = new HttpEntity<>(employeeDTO, headers);
-        return restTemplate.exchange("/api//update-employee/{email}", HttpMethod.PUT, putEntity,
-                EmployeeDTO.class, email);
+        return restTemplate.exchange("/api//update-employee/{id}", HttpMethod.PUT, putEntity,
+                EmployeeDTO.class, id);
     }
 
-    public final ResponseEntity<Integer> deleteEmployeeByEmail(String email) {
-        return restTemplate.exchange("/api//delete-employee-by-email/{email}", HttpMethod.DELETE, null,
-                Integer.class, email);
+    public final ResponseEntity<Integer> deleteEmployeeById(String id) {
+        return restTemplate.exchange("/api//delete-employee-by-email/{id}", HttpMethod.DELETE, null,
+                Integer.class, id);
     }
 }

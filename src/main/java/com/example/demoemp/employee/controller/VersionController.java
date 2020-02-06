@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(value = "version", description = "Endpoint providing current information about the version of the running service; used only for testing and information wise;")
+@Api(value = "version", description = "Endpoint providing current information about the version of the running service.")
 public class VersionController {
 
     @Autowired

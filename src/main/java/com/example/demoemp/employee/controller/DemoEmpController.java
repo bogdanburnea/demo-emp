@@ -2,6 +2,7 @@ package com.example.demoemp.employee.controller;
 
 import com.example.demoemp.employee.dto.EmployeeDTO;
 import com.example.demoemp.employee.service.DemoEmpService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping(path = "/api")
+@Api(value = "demo-emp", description = "Endpoint providing API's for various operations with employee entity.")
 @ApiResponses(value = {@ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 400, message = "Bad Request. The server could not understand the request due to invalid document body."),
         @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -28,12 +29,18 @@ public class DemoEmpController {
         return demoEmpService.findAll();
     }
 
-    @GetMapping("/get-employee-by-email/{email}")
-    @ApiOperation(value = "getEmployeeByEmail", notes = "Endpoint for returning one Employee by email", response = EmployeeDTO.class)
+    @GetMapping("/get-all-leave-employees")
+    @ApiOperation(value = "getAllLeaveEmployees", notes = "Endpoint for returning all leave Employees", response = EmployeeDTO.class)
+    public List<EmployeeDTO> getAllLeaveEmployees() {
+        return demoEmpService.findAllLeaveEmployee();
+    }
+
+    @GetMapping("/get-employee-by-id/{id}")
+    @ApiOperation(value = "getEmployeeById", notes = "Endpoint for returning one Employee by Id", response = EmployeeDTO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "email", value = "Employee email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
-    public EmployeeDTO getEmployeeByEmail(@PathVariable String email) {
-        return demoEmpService.findById(email);
+            @ApiImplicitParam(name = "id", value = "Employee id, String", required = true, dataType = "String")})
+    public EmployeeDTO getEmployeeById(@PathVariable String id) {
+        return demoEmpService.findById(id);
     }
 
     @GetMapping("/get-employee-by-dept/{dept}")
@@ -44,29 +51,46 @@ public class DemoEmpController {
         return demoEmpService.findByDept(dept);
     }
 
-    @PostMapping("/create-employee/{email}")
-    @ApiOperation(value = "createEmployee", notes = "Endpoint for adding a Employee", response = EmployeeDTO.class)
+    @PostMapping("/hire-employee/{id}")
+    @ApiOperation(value = "hireEmployee", notes = "Endpoint for adding a Employee", response = EmployeeDTO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "email", value = "Employee Email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
-    public EmployeeDTO createEmployee(@PathVariable String email, @RequestBody @Valid EmployeeDTO employeeDTO) {
-        return demoEmpService.save(email, employeeDTO);
+            @ApiImplicitParam(name = "id", value = "Employee Id, String", required = true, dataType = "String")})
+    public EmployeeDTO hireEmployee(@PathVariable String id, @RequestBody @Valid EmployeeDTO employeeDTO) {
+        return demoEmpService.save(id, employeeDTO);
     }
 
-    @PutMapping("/update-employee/{email}")
+    @PostMapping("/employeeLeave/{id}/{leaveDate}")
+    @ApiOperation(value = "employeeLeave", notes = "Endpoint for employee leave", response = EmployeeDTO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "Employee Id, String", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "leaveDate", value = "Date of employee leaving, yyyy-MM-dd format", required = true, dataType = "String")})
+    public EmployeeDTO employeeLeave(@PathVariable String id, @PathVariable @JsonFormat(pattern = "yyyy-MM-dd") String leaveDate) {
+        return demoEmpService.employeeLeave(id, leaveDate);
+    }
+
+    @PostMapping("/moveEmployeeDept/{id}/{dept}")
+    @ApiOperation(value = "moveEmployeeDept", notes = "Endpoint for moving an employee to a new department", response = EmployeeDTO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "Employee Id, String", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "dept", value = "Employee department, one of the following values: ADMIN, HR, FIN, SALES, IT, PROD", required = true, dataType = "String")
+    })
+    public EmployeeDTO moveEmployeeDept(@PathVariable String id, @PathVariable String dept) {
+        return demoEmpService.moveEmployeeDept(id, dept);
+    }
+
+    @PutMapping("/update-employee/{id}")
     @ApiOperation(value = "updateEmployee", notes = "Endpoint for updating a Employee", response = EmployeeDTO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "email", value = "Employee Email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
-    public EmployeeDTO updateEmployee(@PathVariable String email, @RequestBody @Valid EmployeeDTO employeeDTO) {
-        return demoEmpService.save(email, employeeDTO);
+            @ApiImplicitParam(name = "id", value = "Employee Id, String", required = true, dataType = "String")})
+    public EmployeeDTO updateEmployee(@PathVariable String id, @RequestBody @Valid EmployeeDTO employeeDTO) {
+        return demoEmpService.save(id, employeeDTO);
     }
 
-    @DeleteMapping("/delete-employee-by-email/{email}")
-    @ApiOperation(value = "deleteEmployeeByEmail", notes = "Endpoint for deleting a Employee by email", response = EmployeeDTO.class)
+    @DeleteMapping("/delete-employee-by-id/{id}")
+    @ApiOperation(value = "deleteEmployeeById", notes = "Endpoint for deleting a Employee by id", response = EmployeeDTO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "email", value = "Employee Email, String, e.g.: firstname.lastname@company.com", required = true, dataType = "String")})
-    public void deleteEmployeeByEmail(@PathVariable String email) {
-        demoEmpService.deleteEmployeeByEmail(email);
+            @ApiImplicitParam(name = "id", value = "Employee id, String", required = true, dataType = "String")})
+    public void deleteEmployeeById(@PathVariable String id) {
+        demoEmpService.deleteEmployeeById(id);
     }
-
 }
-
